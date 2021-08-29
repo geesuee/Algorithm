@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ET_algorithmStudy/ET_algorithmStudy.iml" filepath="$PROJECT_DIR$/ET_algorithmStudy/ET_algorithmStudy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PlayData_algorithmStudy/PlayData_algorithmStudy.iml" filepath="$PROJECT_DIR$/PlayData_algorithmStudy/PlayData_algorithmStudy.iml" />
+    </modules>
+  </component>
+</project>
