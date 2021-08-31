@@ -1,3 +1,6 @@
+// 연결리스트 구현 연습
+// 코드 출처 : https://youtu.be/x22G_r0cln4
+
 package week4.linkedlist.implement.linkedlist;
 
 public class LinkedList {

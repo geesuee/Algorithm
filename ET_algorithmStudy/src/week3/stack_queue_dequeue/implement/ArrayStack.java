@@ -1,4 +1,5 @@
-// 배열로 stack 구현
+// 배열로 stack 구현 연습
+// 코드 출처 : https://freestrokes.tistory.com/82
 
 package week3.stack_queue_dequeue.implement;
 

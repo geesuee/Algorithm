@@ -1,3 +1,6 @@
+// 이중연결리스트 구현 연습
+// 코드 출처 : https://youtu.be/Rg6QRtk5vOU
+
 package week4.linkedlist.implement.doublylinkedlist;
 
 public class DoublyLinkedList {

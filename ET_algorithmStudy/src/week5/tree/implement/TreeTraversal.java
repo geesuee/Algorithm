@@ -1,3 +1,6 @@
+// 트리 순회 구현 연습
+// 코드 출처 : https://minhamina.tistory.com/80
+
 package week5.tree.implement;
 
 class Node {
