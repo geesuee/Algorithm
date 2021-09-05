@@ -26,7 +26,7 @@ public class Q1_1427_implement {
 
         mergeSort(0, src.length - 1);
 
-        for(int j = src.length -1; j >=0; j--) {
+        for(int j = 0; j < src.length; j++) {
             System.out.print(src[j]);
         }
     }
@@ -46,7 +46,7 @@ public class Q1_1427_implement {
             // 동시에 종료되지 않을 수 있으니 || 조건
             // =이 들어간 것은 원소의 개수가 1개일 때까지 쪼개기 때문
             while(p <= mid || q <= end) {
-                if(q > end || (p <= mid && src[p] <= src[q])) {
+                if(q > end || (p <= mid && src[p] >= src[q])) {
                     tmp[idx++] = src[p++];  // 1번 분할의 값
                 }else {
                     tmp[idx++] = src[q++];  // 2번 분할의 값
