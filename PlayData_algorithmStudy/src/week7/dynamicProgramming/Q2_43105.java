@@ -12,16 +12,23 @@ public class Q2_43105 {
     }
 
     public static int solution(int[][] triangle) {
-        int[] DP = new int[triangle.length + 1];
+        int[][] DP = new int[triangle.length][triangle.length];
 
-        DP[1] = triangle[0][0];
-        DP[2] = triangle[0][0] + Math.max(triangle[1][0], triangle[1][1]);
+        DP[0][0] = triangle[0][0];
 
-        //자기 바로 밑에 두 개 중 큰 것 체크하는 로직
-        
-        //다음 레벨로 넘어간 부분까지 비교하는 로직
+        for(int i = 1; i < triangle.length; i++) {
+            DP[i][0] = triangle[i][0] + DP[i-1][0];
 
-        int answer = 0;
-        return answer;
+            for(int j = 1; j < i+1; j++) {
+                DP[i][j] = triangle[i][j] + Math.max(DP[i -1][j - 1], DP[i -1][j]);
+            }
+        }
+
+        int max = 0;
+        for(int i = 0; i < DP[DP.length - 1].length; i++) {
+            max = Math.max(DP[DP.length - 1][i], max);
+        }
+
+        return max;
     }
 }
