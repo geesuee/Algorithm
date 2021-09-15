@@ -8,27 +8,44 @@ public class Q2_43105 {
     public static void main(String[] args) {
         int[][] triangle = {{7}, {3, 8}, {8, 1, 0}, {2, 7, 4, 4}, {4, 5, 2, 6, 5}};
 
-        solution(triangle);
+        System.out.println("top-down 풀이 : " + solution1(triangle));
+        System.out.println("bottom-up 풀이 : " + solution2(triangle));
     }
 
-    public static int solution(int[][] triangle) {
-        int[][] DP = new int[triangle.length][triangle.length];
-
-        DP[0][0] = triangle[0][0];
-
+    //top-down
+    public static int solution1(int[][] triangle) {
+        // 1. 기본값 초기화  //
+        int[][] dp = new int[triangle.length][triangle.length];
+        dp[0][0] = triangle[0][0];
         for(int i = 1; i < triangle.length; i++) {
-            DP[i][0] = triangle[i][0] + DP[i-1][0];
+            dp[i][0] = dp[i - 1][0] + triangle[i][0];
+            dp[i][i] = dp[i - 1][i - 1] + triangle[i][i];
+        }
 
-            for(int j = 1; j < i+1; j++) {
-                DP[i][j] = triangle[i][j] + Math.max(DP[i -1][j - 1], DP[i -1][j]);
+        // 2. 동적계획법 //
+        for(int i = 2; i < triangle.length; i++) {
+            for(int j = 1; j < i; j++) {
+                dp[i][j] = Math.max(dp[i - 1][j - 1], dp[i - 1][j]) + triangle[i][j];
             }
         }
 
+        // 3. 최대값 반환 //
         int max = 0;
-        for(int i = 0; i < DP[DP.length - 1].length; i++) {
-            max = Math.max(DP[DP.length - 1][i], max);
+        for(int i = 0; i < dp.length; i++) {
+            max = Math.max(max, dp[dp.length - 1][i]);
         }
 
         return max;
+    }
+
+    //bottom-up
+    public static int solution2(int[][] triangle) {
+        for(int i = triangle.length-2; i >= 0; i--) {
+            for(int j = 0; j < triangle[i].length; j++) {
+                triangle[i][j] += Math.max(triangle[i+1][j],triangle[i+1][j+1]);
+            }
+        }
+
+        return triangle[0][0];
     }
 }
