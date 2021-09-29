@@ -1,8 +1,8 @@
 // [백준] 특정 거리의 도시 찾기
 // https://www.acmicpc.net/problem/18352
 
-// StringBuilder로 출력
-// 메모리 초과
+// 메모리 초과 : 인접행렬 => 인접리스트로 수정 후 해결
+// 테스트 케이스는 맞는데 오답 처리되는 이유 찾지 못함ㅜ
 
 package week8.dijkstra;
 
@@ -14,11 +14,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 public class Q2_18352_trial {
-    static int N;
-    static int M;
-    static int K;
-    static int X;
-    static int[][] map;
+    static int N,M,K,X;
+    static ArrayList<Integer>[] map;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,13 +26,16 @@ public class Q2_18352_trial {
         K = Integer.parseInt(st.nextToken());
         X = Integer.parseInt(st.nextToken());
 
-        map = new int[N+1][N+1];
+        map = new ArrayList[N+1];
+        for (int i = 1; i <= N; i++) {
+            map[i] = new ArrayList<Integer>();
+        }
 
         for(int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine(), " ");
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            map[a][b] = 1;
+            map[a].add(b);
         }
         br.close();
 
@@ -63,13 +63,13 @@ public class Q2_18352_trial {
         }
 
         // 시작 노드 값 초기화
-        cost[X] = Integer.MAX_VALUE;
+        //cost[X] = Integer.MAX_VALUE;
         visited[X] = true;
 
         // 연결된 노드 cost 값 갱신
         List<Integer> linked_index = new ArrayList<>();
         for(int i = 1; i < N+1; i++) {
-            if(!visited[i] && map[X][i] == 1) {
+            if(!visited[i] && map[X].contains(i)) {
                 cost[i] = 1;
                 linked_index.add(i);
             }
@@ -80,9 +80,9 @@ public class Q2_18352_trial {
             visited[idx] = true;
 
             for(int i = 1; i < N+1; i++) {
-                if(!visited[i] && map[idx][i] == 1) {
-                    if(cost[i] > cost[idx] + map[idx][i]) {
-                        cost[i] = cost[idx] + map[idx][i];
+                if(!visited[i] && map[idx].contains(i)) {
+                    if(cost[i] > cost[idx] + 1) {
+                        cost[i] = cost[idx] + 1;
                     }
                 }
             }
@@ -96,6 +96,6 @@ public class Q2_18352_trial {
             }
         }
 
-        return sb.length()!=0? sb.toString():"-1";
+        return sb.length()!=0? sb.toString().trim():"-1";
     }
 }
