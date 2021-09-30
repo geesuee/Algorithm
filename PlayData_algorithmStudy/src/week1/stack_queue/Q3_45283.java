@@ -7,6 +7,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Q3_45283 {
+    public static void main(String[] args) {
+        int bridge_length = 2;
+        int weight = 10;
+        int[] truck_weights = {7, 4, 5, 6};
+
+        System.out.println(solution(bridge_length, weight, truck_weights));
+    }
+
     static int queueSum(Queue<Integer> queue) {
         int sum = 0;
         for(int n : queue) {
