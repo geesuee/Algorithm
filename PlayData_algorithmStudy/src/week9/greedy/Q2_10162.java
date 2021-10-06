@@ -13,6 +13,6 @@ public class Q2_10162 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         int T = Integer.parseInt(br.readLine());
-        System.out.println(T%10 == 0? T/300 + " " + T/60 + " " + T/10 : -1);
+        System.out.print(T%10==0?T/300+" "+T%300/60+" "+T%60/10:-1);
     }
 }

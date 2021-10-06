@@ -27,7 +27,6 @@ public class Q1_42862 {
             for(int j = 0; j < rlen; j++) {
                 if(lost[i] == reserve[j]) {
                     answer++;
-                    //System.out.println(lost[i] + "학생 / 맞는걸로 / " + reserve[j] + " / " + answer);
                     reserve[j] = -100;
                     lost[i] = -100;
                     break;
@@ -37,14 +36,8 @@ public class Q1_42862 {
 
         for(int l : lost) {
             for(int i = 0; i < rlen; i++) {
-                if(l == reserve[i]-1) {
+                if(l == reserve[i]-1 || l == reserve[i]+1) {
                     answer += 1;
-                    //System.out.println(l + "학생 / 작은걸로 / " + reserve[i] + " / " + answer);
-                    reserve[i] = -1;
-                    break;
-                }else if(l == reserve[i]+1) {
-                    answer += 1;
-                    //System.out.println(l + "학생 / 큰걸로 / " + reserve[i] + " / " + answer);
                     reserve[i] = -1;
                     break;
                 }
