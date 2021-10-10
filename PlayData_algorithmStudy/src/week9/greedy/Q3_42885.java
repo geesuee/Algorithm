@@ -22,11 +22,10 @@ public class Q3_42885 {
 
         for(int p2 = people.length-1; p2 >= p1; p2--) {
             if(people[p1] + people[p2] > limit) {
-                answer++;
             }else {
-                answer++;
                 p1++;
             }
+            answer++;
         }
 
         return answer;
