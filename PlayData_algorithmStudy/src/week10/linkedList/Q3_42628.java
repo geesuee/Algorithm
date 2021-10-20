@@ -5,6 +5,7 @@
 package week10.linkedList;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class Q3_42628 {
@@ -16,6 +17,44 @@ public class Q3_42628 {
     }
 
     public static int[] solution(String[] operations) {
+        int[] answer = {0,0};
+        PriorityQueue<Integer> priorityQueueWithMax = new PriorityQueue<>(Comparator.reverseOrder());  //우선순위가 큰 수 부터
+        PriorityQueue<Integer> priorityQueueWithMin = new PriorityQueue<>();  //우선순위가 작은 수 부터
+
+        for (String operation : operations) {
+            String[] splitOther = operation.split(" ");
+
+            if (splitOther[0].equals("I")) {
+                priorityQueueWithMax.add(Integer.parseInt(splitOther[1]));
+                priorityQueueWithMin.add(Integer.parseInt(splitOther[1]));
+            }
+
+            if (splitOther[0].equals("D")) {
+                if (!priorityQueueWithMax.isEmpty()) {
+                    if (splitOther[1].equals("1")) {
+                        int max = priorityQueueWithMax.peek();
+                        priorityQueueWithMax.remove(max);
+                        priorityQueueWithMin.remove(max);
+
+                    } else {
+                        int min = priorityQueueWithMin.peek();
+                        priorityQueueWithMax.remove(min);
+                        priorityQueueWithMin.remove(min);
+                    }
+                }
+            }
+
+        }
+        if (!priorityQueueWithMax.isEmpty()) {
+            answer[0] = priorityQueueWithMax.peek();
+            answer[1] = priorityQueueWithMin.peek();
+
+        }
+        return answer;
+    }
+
+    // 이 코드는 왜 틀렸을까..?
+    public static int[] trial(String[] operations) {
         int[] answer = new int[2];
 
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
@@ -37,9 +76,7 @@ public class Q3_42628 {
                 }else if(s2.equals("1")) {
                     PriorityQueue<Integer> reverse = new PriorityQueue<>(Collections.reverseOrder());
                     reverse.addAll(priorityQueue);
-                    int out = reverse.poll();
-                    System.out.println(out);
-                    System.out.println(reverse.contains(653));
+                    reverse.poll();
                     priorityQueue.addAll(reverse);
                 }
             }
