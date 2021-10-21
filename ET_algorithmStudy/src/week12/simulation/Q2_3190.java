@@ -1,7 +1,7 @@
 // [백준] 뱀
 // https://www.acmicpc.net/problem/3190
 
-package week12.algorithm;
+package week12.simulation;
 
 import java.io.BufferedReader;
 import java.io.IOException;
