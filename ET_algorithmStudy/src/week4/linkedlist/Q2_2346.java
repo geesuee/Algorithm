@@ -1,35 +1,50 @@
 // [백준] 풍선 터뜨리기
 // https://www.acmicpc.net/problem/2346
-// *시간 초과 -> LinkedList 활용한 풀이로 수정 필요
 
 package week4.linkedlist;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.TreeMap;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.StringTokenizer;
 
 public class Q2_2346 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
 
-        TreeMap<String, Integer> treeMap = new TreeMap<>();
-        int totalNum = 0;
-        String tree = br.readLine();
-        while (tree != null && tree.length() != 0) {
-            treeMap.put(tree, treeMap.getOrDefault(tree, 0) + 1);
-            totalNum++;
-            tree = br.readLine();
+        int num = Integer.parseInt(br.readLine());
+
+        Deque<int[]> list = new ArrayDeque<>();
+        StringTokenizer input = new StringTokenizer(br.readLine());
+
+        sb.append("1 ");
+        int move = Integer.parseInt(input.nextToken());
+
+        for (int i = 2; i <= num ; i++) {
+            list.add(new int[]{i, Integer.parseInt(input.nextToken())});
         }
 
-        Iterator<String> keyAll = treeMap.keySet().iterator();
-        String key = null;
-        while(keyAll.hasNext()) {
-            key = keyAll.next();
-            double per = (double)(treeMap.get(key)*100)/totalNum;
-            System.out.println(key + " " + String.format("%.4f", per));
-        }
+        while (!list.isEmpty()) {
+            if (move > 0) {
+                for (int x = 1; x < move; x++) {
+                    list.add(list.pollFirst());
+                }
+
+                int[] next = list.removeFirst();
+                move = next[1];
+                sb.append(next[0]).append(" ");
+            } else {
+                for (int x = move; x < -1; x++) {
+                    list.addFirst(list.pollLast());
+                }
+
+                int[] next = list.removeLast();
+                move = next[1]; sb.append(next[0]).append(" ");
+            }
+        } System.out.println(sb);
     }
 }
