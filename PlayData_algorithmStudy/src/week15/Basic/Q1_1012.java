@@ -30,8 +30,7 @@ public class Q1_1012 {
             int N = Integer.parseInt(st.nextToken()); // 배추밭 세로 길이
             int K = Integer.parseInt(st.nextToken()); // 배추 위치 개수
 
-            int size = Math.max(M,N);
-            arr = new int[size][size];
+            arr = new int[M][N];
             visit = new boolean[M*N];
 
             for(int j = 0; j < K; j++) {
@@ -39,11 +38,10 @@ public class Q1_1012 {
                 int X = Integer.parseInt(st.nextToken());
                 int Y = Integer.parseInt(st.nextToken());
                 arr[X][Y] = 1;
-                arr[Y][X] = 1;
             }
 
             // 핵심 로직 실행
-            for(int k = 0; k < visit.length; k++) {
+            for(int k = 0; k < arr.length; k++) {
                 if(!visit[i]) {
                     bfs(i, visit, arr);
                     larva++;
@@ -62,7 +60,7 @@ public class Q1_1012 {
         visit[i] = true;
         while(!q.isEmpty()) {
             int temp = q.poll();
-            for(int j = 0; j < arr.length; j++) {
+            for(int j = 0; j < arr[0].length; j++) {
                 if(arr[temp][j] == 1 && !visit[j]) {
                     q.offer(j);
                     visit[j] = true;
