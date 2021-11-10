@@ -25,7 +25,7 @@ public class Q2_42842 {
 
         int total = brown + yellow;
 
-        for (int i = 1; i <= total; i++) {
+        for (int i = 1; i < total; i++) {
             // 가로 : x, 세로 : i
             int x = total / i;
 
@@ -34,10 +34,11 @@ public class Q2_42842 {
                 continue;
             }
 
-            if((x-2) * (i -2) == yellow) {
+            else if((x-2) * (i -2) == yellow) {
                 answer[0] = x;
                 answer[1] = i;
-                return answer; //이게 꼭 있어야 하는데..?
+
+                break;
             }
         }
 

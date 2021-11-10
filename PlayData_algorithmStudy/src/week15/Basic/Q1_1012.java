@@ -14,8 +14,8 @@ public class Q1_1012 {
     static int M, N, K;
     static int[][] arr;
     static boolean[][] visit;
-    static int[] dx = { 0, -1, 0, 1 };
-    static int[] dy = { 1, 0, -1, 0 };
+    static int[] dx = { 1, 0, -1, 0 };
+    static int[] dy = { 0, -1, 0, 1 };
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -59,7 +59,7 @@ public class Q1_1012 {
     }
 
     static void bfs(int x, int y) {
-        Queue<int[]> qu = new LinkedList<int[]>();
+        Queue<int[]> qu = new LinkedList<>();
         qu.add(new int[] { x, y });
 
         while (!qu.isEmpty()) {
@@ -67,7 +67,7 @@ public class Q1_1012 {
             y = qu.peek()[1];
             visit[x][y] = true;
             qu.poll();
-            for (int i = 0; i < 4; i++) { // 반시계 방향으로 도는 네모
+            for (int i = 0; i < 4; i++) { // 오,아래,왼,위
                 int cx = x + dx[i];
                 int cy = y + dy[i];
 
