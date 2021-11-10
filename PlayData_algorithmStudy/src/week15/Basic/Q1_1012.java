@@ -1,6 +1,5 @@
 // [백준] 유기농 배추
 // https://www.acmicpc.net/problem/1012
-// 미완
 
 package week15.Basic;
 
@@ -12,8 +11,11 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Q1_1012 {
+    static int M, N, K;
     static int[][] arr;
-    static boolean[] visit;
+    static boolean[][] visit;
+    static int[] dx = { 0, -1, 0, 1 };
+    static int[] dy = { 1, 0, -1, 0 };
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,12 +28,12 @@ public class Q1_1012 {
             int larva = 0;
 
             st = new StringTokenizer(br.readLine());
-            int M = Integer.parseInt(st.nextToken()); // 배추밭 가로 길이
-            int N = Integer.parseInt(st.nextToken()); // 배추밭 세로 길이
-            int K = Integer.parseInt(st.nextToken()); // 배추 위치 개수
+            M = Integer.parseInt(st.nextToken()); // 배추밭 가로 길이
+            N = Integer.parseInt(st.nextToken()); // 배추밭 세로 길이
+            K = Integer.parseInt(st.nextToken()); // 배추 위치 개수
 
             arr = new int[M][N];
-            visit = new boolean[M*N];
+            visit = new boolean[M][N];
 
             for(int j = 0; j < K; j++) {
                 st = new StringTokenizer(br.readLine());
@@ -41,10 +43,12 @@ public class Q1_1012 {
             }
 
             // 핵심 로직 실행
-            for(int k = 0; k < arr.length; k++) {
-                if(!visit[i]) {
-                    bfs(i, visit, arr);
-                    larva++;
+            for (int k = 0; k < M; k++) {
+                for (int l = 0; l < N; l++) {
+                    if (arr[k][l] == 1 && !visit[k][l]) {
+                        bfs(k, l);
+                        larva++;
+                    }
                 }
             }
 
@@ -54,18 +58,28 @@ public class Q1_1012 {
         System.out.println(sb.toString().trim());
     }
 
-    public static void bfs(int i, boolean[] visit, int[][] arr) {
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(i);
-        visit[i] = true;
-        while(!q.isEmpty()) {
-            int temp = q.poll();
-            for(int j = 0; j < arr[0].length; j++) {
-                if(arr[temp][j] == 1 && !visit[j]) {
-                    q.offer(j);
-                    visit[j] = true;
+    static void bfs(int x, int y) {
+        Queue<int[]> qu = new LinkedList<int[]>();
+        qu.add(new int[] { x, y });
+
+        while (!qu.isEmpty()) {
+            x = qu.peek()[0];
+            y = qu.peek()[1];
+            visit[x][y] = true;
+            qu.poll();
+            for (int i = 0; i < 4; i++) { // 반시계 방향으로 도는 네모
+                int cx = x + dx[i];
+                int cy = y + dy[i];
+
+                if (cx >= 0 && cy >= 0 && cx < M && cy < N) { // 밭 범위 안에 있으면서
+                    if (!visit[cx][cy] && arr[cx][cy] == 1) { // 방문하지 않았고, 배추가 있으면
+                        visit[cx][cy] = true;
+                        qu.add(new int[] { cx, cy });
+                    }
                 }
+
             }
+
         }
     }
 }
