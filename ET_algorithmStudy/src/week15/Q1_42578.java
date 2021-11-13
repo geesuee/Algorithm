@@ -20,8 +20,11 @@ public class Q1_42578 {
         HashMap<String, List<String>> hashmap = new HashMap<>();
 
         for(String[] c : clothes) {
-//            hashmap.put(c[0], hashmap.getOrDefault(c[0], new LinkedList<>()).add(c[1]) );
-            hashmap.put(c[1], hashmap.getOrDefault(c[1], new LinkedList<String>()));
+//            hashmap.put(c[1], hashmap.getOrDefault(c[1], new LinkedList<String>()));
+//            hashmap.get(c[1]).add(c[0]);
+            if(hashmap.getOrDefault(c[1], null) == null) {
+                hashmap.put(c[1], new LinkedList<String>());
+            }
             hashmap.get(c[1]).add(c[0]);
         }
 
