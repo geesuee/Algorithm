@@ -2,7 +2,7 @@
 // https://www.acmicpc.net/problem/8983
 // 이분 탐색
 
-package week16;
+package week16.Basic;
 
 import java.io.BufferedReader;
 import java.io.IOException;

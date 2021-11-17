@@ -1,7 +1,7 @@
 // [백준] 랜선 자르기
 // https://www.acmicpc.net/problem/1654
 
-package week16;
+package week16.Basic;
 
 import java.io.BufferedReader;
 import java.io.IOException;
