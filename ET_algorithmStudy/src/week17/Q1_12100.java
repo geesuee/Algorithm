@@ -1,6 +1,5 @@
 // [백준] 2048 (Easy)
 // https://www.acmicpc.net/problem/12100
-// 미완...예외가 어디 있을까?
 
 package week17;
 
@@ -33,7 +32,7 @@ public class Q1_12100 {
     }
 
     static void dfs(int[][] curBoard, int cnt) {
-        if(cnt == 6) {
+        if(cnt == 5) {
             int max = findMax(curBoard);
             answer = Math.max(answer, max);
             return;
@@ -69,19 +68,23 @@ public class Q1_12100 {
             // 행을 기준으로 반복문(역방향)
                 // "
 
-        int[][] nextBoard = curBoard.clone();
+        int[][] nextBoard = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            System.arraycopy(curBoard[i], 0, nextBoard[i], 0, curBoard[i].length);
+        }
+
         int before;
         int index;
         if(direction == 0) { // 상
-            before = 0;
-            index = 0;
             for(int i = 0; i < N; i++) {
+                before = 0;
+                index = 0;
                 for(int j = 0; j < N; j++) {
                     if(nextBoard[j][i] != 0) {
                         if(nextBoard[j][i] == before) {
                             nextBoard[index - 1][i] = before * 2; // 위쪽으로 합침(index 바로 전 행으로)
                             before = 0;
-                            nextBoard[i][j] = 0;
+                            nextBoard[j][i] = 0;
                         }else {
                             before = nextBoard[j][i];
                             // 자리 조정
@@ -93,9 +96,9 @@ public class Q1_12100 {
                 }
             }
         } else if(direction == 1) { // 하
-            before = 0;
-            index = N-1;
             for(int i = 0; i < N; i++) {
+                before = 0;
+                index = N-1;
                 for(int j =N-1; j >= 0; j--) {
                     if(nextBoard[j][i] != 0) {
                         if(nextBoard[j][i] == before) {
@@ -113,9 +116,9 @@ public class Q1_12100 {
                 }
             }
         } else if(direction == 2) { // 좌
-            before = 0;
-            index = 0;
             for(int i = 0; i < N; i++) {
+                before = 0;
+                index = 0;
                 for(int j = 0; j < N; j++) {
                     if(nextBoard[i][j] != 0) {
                         if(nextBoard[i][j] == before) {
@@ -133,9 +136,9 @@ public class Q1_12100 {
                 }
             }
         } else { // 우
-            before = 0;
-            index = N-1;
             for(int i = 0; i < N; i++) {
+                before = 0;
+                index = N-1;
                 for(int j = N-1; j >= 0; j--) {
                     if(nextBoard[i][j] != 0) {
                         if(nextBoard[i][j] == before) {
